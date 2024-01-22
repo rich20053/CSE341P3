@@ -1,0 +1,23 @@
+// LOCALHOST 
+### GET http://localhost:8080/contacts 
+### GET http://localhost:8080/contacts/65a60d17c88ca384b22d9e9c 
+### GET http://localhost:8080/contacts/65a60dddc88ca384b22d9e9d 
+### GET http://localhost:8080/contacts/65a60e65c88ca384b22d9e9e
+### GET http://localhost:8080/contacts/65a60f61c88ca384b22d9e9f
+### GET http://localhost:8080 
+### GET http://localhost:8080/65a60d17c88ca384b22d9e9c 
+### GET http://localhost:8080/65a60dddc88ca384b22d9e9d 
+### GET http://localhost:8080/65a60e65c88ca384b22d9e9e
+### GET http://localhost:8080/65a60f61c88ca384b22d9e9f
+
+// PRODUCTION Deploy 
+### GET https://week2service.onrender.com/contacts 
+### GET https://week2service.onrender.com/contacts/65a60d17c88ca384b22d9e9c 
+### GET https://week2service.onrender.com/contacts/65a60dddc88ca384b22d9e9d 
+### GET https://week2service.onrender.com/contacts/65a60e65c88ca384b22d9e9e
+### GET https://week2service.onrender.com/contacts/65a60f61c88ca384b22d9e9f
+### GET https://week2service.onrender.com/ 
+### GET https://week2service.onrender.com/65a60d17c88ca384b22d9e9c 
+### GET https://week2service.onrender.com/65a60dddc88ca384b22d9e9d 
+### GET https://week2service.onrender.com/65a60e65c88ca384b22d9e9e
+### GET https://week2service.onrender.com/65a60f61c88ca384b22d9e9f
