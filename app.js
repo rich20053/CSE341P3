@@ -3,13 +3,20 @@ const MongoClient = require('mongodb').MongoClient;
 const mongodb = require('./models/connect');
 const contactRoutes = require('./routes/contacts');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 const port = process.env.PORT || 8080;
 const app = express();
 
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+
 app
+  .use(cors(corsOptions))
   .use(bodyParser.json())
   .use('/', require('./routes'))
+  .use(express.urlencoded({ extended: true }))
   .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
