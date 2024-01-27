@@ -1,58 +1,51 @@
-// LOCALHOST 
-### GET http://localhost:8080/contacts 
-### GET http://localhost:8080/contacts/65a60d17c88ca384b22d9e9c 
-### GET http://localhost:8080/contacts/65a60dddc88ca384b22d9e9d 
-### GET http://localhost:8080/contacts/65a60e65c88ca384b22d9e9e
-### GET http://localhost:8080/contacts/65a60f61c88ca384b22d9e9f
-### GET http://localhost:8080 
-### GET http://localhost:8080/65a60d17c88ca384b22d9e9c 
-### GET http://localhost:8080/65a60dddc88ca384b22d9e9d 
-### GET http://localhost:8080/65a60e65c88ca384b22d9e9e
-### GET http://localhost:8080/65a60f61c88ca384b22d9e9f
+// LOCALHOST Deploy
+### Get all contacts GET http://localhost:8080/contacts
 
-// PRODUCTION Deploy 
-### GET https://week2service.onrender.com/contacts 
-### GET https://week2service.onrender.com/contacts/65a60d17c88ca384b22d9e9c 
-### GET https://week2service.onrender.com/contacts/65a60dddc88ca384b22d9e9d 
-### GET https://week2service.onrender.com/contacts/65a60e65c88ca384b22d9e9e
-### GET https://week2service.onrender.com/contacts/65a60f61c88ca384b22d9e9f
-### GET https://week2service.onrender.com/ 
-### GET https://week2service.onrender.com/65a60d17c88ca384b22d9e9c 
-### GET https://week2service.onrender.com/65a60dddc88ca384b22d9e9d 
-### GET https://week2service.onrender.com/65a60e65c88ca384b22d9e9e
-### GET https://week2service.onrender.com/65a60f61c88ca384b22d9e9f
+### Get contact by id GET http://localhost:8080/65a60d17c88ca384b22d9e9c 
+
+### Create contact POST http://localhost:8080/contacts HTTP/1.1 content-type: application/json
 
 
-// LOCALHOST ### Get all contacts GET http://localhost:8080/contacts
+{ 
 
-### Get contact by id GET http://localhost:8080/contacts/622023f642f9ab4cd6e060b3
+    "firstName": "Becca", "lastName": "Manning", "email": "BManning22@gmail.com", "favoriteColor": "Yellow", "birthday": "01/19/2003"
+
+}
 
 ### Create contact POST http://localhost:8080/contacts HTTP/1.1 content-type: application/json
 
 {
-"firstName":"Ashley", "lastName":"Weaver", "email":"aWeaver@test.com", "favoriteColor":"Brown", "birthday":"06/19/2000"
+
+    "firstName": "Becca", "lastName": "Manning", "email": "BManning22@gmail.com", "favoriteColor": "Yellow", "birthday": "01/19/2003"
+
 }
 
-### PUT contact PUT http://localhost:8080/contacts/6220bcb39cd507e920c75a0b HTTP/1.1 content-type: application/json
+### PUT contact PUT http://localhost:8080/contacts/65a60f61c88ca384b22d9e9f HTTP/1.1 content-type: application/json
 
 {
-"firstName":"Sarah", "lastName":"Birch", "email":"test@gmail.com", "favoriteColor":"Green", "birthday":"12/12/20"
-} ### DELETE contact DELETE http://localhost:8080/contacts/6220b775099269ff7b31ceab HTTP/1.1
 
-// PRODUCTION Deploy ### Get all contacts GET https://cse341-instructor.herokuapp.com/contacts
+"firstName":"Becca", "lastName":"Manning", "email":"NewEmail@gmail.com", "favoriteColor":"Green", "birthday":"10/02/02"
 
-### Get contact by id GET https://cse341-instructor.herokuapp.com/contacts/622023f642f9ab4cd6e060b3
+} 
 
-### Create contact POST https://cse341-instructor.herokuapp.com/contacts HTTP/1.1 content-type: application/json
+### DELETE contact DELETE http://localhost:8080/contacts/6220b775099269ff7b31ceab HTTP/1.1
+
+
+// PRODUCTION Deploy 
+### Get all contacts GET https://week3service.onrender.com/ 
+
+### Get contact by id GET https://week3service.onrender.com/65a60d17c88ca384b22d9e9c 
+
+### Create contact POST https://week3service.onrender.com/contacts HTTP/1.1 content-type: application/json
 
 {
-"firstName":"Ashley", "lastName":"Weaver", "email":"aWeaver@test.com", "favoriteColor":"Brown", "birthday":"06/19/2000"
+    "firstName": "Becca", "lastName": "Manning", "email": "BManning22@gmail.com", "favoriteColor": "Yellow", "birthday": "01/19/2003"
 }
 
-### PUT contact PUT https://cse341-instructor.herokuapp.com/contacts/6220bcb39cd507e920c75a0b HTTP/1.1 content-type: application/json
+### PUT contact PUT https://week3service.onrender.com/contacts/6220bcb39cd507e920c75a0b HTTP/1.1 content-type: application/json
 
 {
-"firstName":"Sarah", "lastName":"Birch", "email":"sarahB@gmail.com", "favoriteColor":"Yellow", "birthday":"06/12/20"
+"firstName":"Becca", "lastName":"Manning", "email":"NewEmail@gmail.com", "favoriteColor":"Green", "birthday":"10/02/02"
 }
 
-### DELETE contact DELETE https://cse341-instructor.herokuapp.com/contacts/6220e34083149913680f9a64 HTTP/1.1
+### DELETE contact DELETE https://week3service.onrender.com/contacts/6220e34083149913680f9a64 HTTP/1.1

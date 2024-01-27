@@ -1,6 +1,8 @@
+const { isNull } = require('util');
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
 
+// Return all contacts
 const getAll = async (req, res, next) => {
   
   const result = await mongodb.getDb().db("MarkContact").collection('Contacts').find();
@@ -10,6 +12,7 @@ const getAll = async (req, res, next) => {
   });
 };
 
+// Return one contact by id
 const getSingle = async (req, res, next) => {
   const userId = new ObjectId(req.params.id);
 
@@ -24,14 +27,19 @@ const getSingle = async (req, res, next) => {
   });
 };
 
+// Create one contact from body json
 const createContact = async (req, res, next) => {
+
   // Validate request
-  if (!req.body) {
+ 
+  if (!req.body.length) { 
     return res.status(400).send({
-      message: "Data to update can not be empty!"
+      message: "Data to for new contact cannot be empty!"
     });
   }
   
+
+
   // Create a Contact
   const contact = {
     firstName: req.body.firstName,
@@ -40,126 +48,58 @@ const createContact = async (req, res, next) => {
     favoriteColor: req.body.favoriteColor,
     birthday: req.body.birthday
   };
-  
+
   // Save Contact in the database
   const result = await mongodb.getDb().db("MarkContact").collection('Contacts').insertOne(contact);
 
-  if (response.acknowledged) {
-    res.status(201).json(response);
+  if (result.acknowledged) {
+    res.status(201).json(result);
   } else {
-    res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+    res.status(500).json(result.error || 'An error occurred while creating the contact.');
   }
-
-  /*
-  contact
-    .save(contact)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Contact."
-      });
-    });*/
 };
   
-
-
+// Update a single contact
 const updateContact = async (req, res, next) => {
-  if (!req.body) {
+  // Data Validation
+  if (!req.body.length) {
     return res.status(400).send({
-      message: "Data to update can not be empty!"
+      message: "Data to update contact cannot be empty!"
     });
   }
   
   const userId = new ObjectId(req.params.id);
+
+  // Update a Contact
+  const contact = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
+  };
   
-  const response = await mongodb
-    .getDb()
-    .db("MarkContact")
-    .collection('Contacts')
-    .replaceOne({ _id: userId }, contact);
+  // Update data in database
+  const response = await mongodb.getDb().db("MarkContact").collection('Contacts').replaceOne({ _id: userId }, contact);
   console.log(response);
   if (response.modifiedCount > 0) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+    res.status(500).json(response.error || 'An error occurred while updating the contact.');
   }
-
-  /*
-  const id = req.params.id;
-  
-  Contact.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update Contact with id=${id}. Maybe Contact was not found!`
-        });
-      } else res.send({ message: "Contacct was updated successfully." });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Contact with id=" + id
-      });
-    });*/
 }; 
-/*
-  const result = await mongodb
-    .getDb()
-    .db("MarkContact")
-    .collection('Contacts')
-    .find({ _id: userId });
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists[0]);
-  });
-};*/
 
+// Delete one Contact
 const deleteContact = async (req, res, next) => {
   const userId = new ObjectId(req.params.id);
   
-  const response = await mongodb.getDb().db("MarkContact").collection('Contacts').remove({ _id: userId }, true);
-  console.log(response);
+  const response = await mongodb.getDb().db("MarkContact").collection('Contacts').deleteOne({ _id: userId }, true);
   if (response.deletedCount > 0) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+    res.status(500).json(response.error || 'An error occurred while deleting the contact.');
   }
-
-  /*
-  const id = req.params.id;
-  
-  Contact.findByIdAndRemove(id)
-    .then(data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot delete Contact with id=${id}. Maybe Contact was not found!`
-        });
-      } else {
-        res.send({
-          message: "Contact was deleted successfully!"
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not delete Contact with id=" + id
-      });
-    }); */
 };
-
-/*
-  const result = await mongodb
-    .getDb()
-    .db("MarkContact")
-    .collection('Contacts')
-    .find({ _id: userId });
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists[0]);
-  });
-};*/
 
 module.exports = { 
   getAll, 
