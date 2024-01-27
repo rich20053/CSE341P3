@@ -14,6 +14,7 @@ var corsOptions = {
 
 app
   .use(cors(corsOptions))
+  //.use(express.json())
   .use(bodyParser.json())
   .use('/', require('./routes'))
   .use(express.urlencoded({ extended: true }))

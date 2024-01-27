@@ -26,9 +26,10 @@ const getSingle = async (req, res, next) => {
 
 const createContact = async (req, res, next) => {
   // Validate request
-  if (!req.body.title) {
-    res.status(400).send({ message: "Content can not be empty!" });
-    return;
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!"
+    });
   }
   
   // Create a Contact
@@ -66,13 +67,27 @@ const createContact = async (req, res, next) => {
 
 
 const updateContact = async (req, res, next) => {
-  //const userId = new ObjectId(req.params.id);
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update can not be empty!"
     });
   }
   
+  const userId = new ObjectId(req.params.id);
+  
+  const response = await mongodb
+    .getDb()
+    .db("MarkContact")
+    .collection('Contacts')
+    .replaceOne({ _id: userId }, contact);
+  console.log(response);
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+  }
+
+  /*
   const id = req.params.id;
   
   Contact.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
@@ -87,8 +102,8 @@ const updateContact = async (req, res, next) => {
       res.status(500).send({
         message: "Error updating Contact with id=" + id
       });
-    });
-};
+    });*/
+}; 
 /*
   const result = await mongodb
     .getDb()
@@ -102,7 +117,17 @@ const updateContact = async (req, res, next) => {
 };*/
 
 const deleteContact = async (req, res, next) => {
-  //const userId = new ObjectId(req.params.id);
+  const userId = new ObjectId(req.params.id);
+  
+  const response = await mongodb.getDb().db("MarkContact").collection('Contacts').remove({ _id: userId }, true);
+  console.log(response);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+  }
+
+  /*
   const id = req.params.id;
   
   Contact.findByIdAndRemove(id)
@@ -121,7 +146,7 @@ const deleteContact = async (req, res, next) => {
       res.status(500).send({
         message: "Could not delete Contact with id=" + id
       });
-    });
+    }); */
 };
 
 /*
