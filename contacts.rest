@@ -21,20 +21,20 @@
 
 
 // PRODUCTION Deploy 
-### Get all contacts GET https://week3service.onrender.com/contacts
+### Get all contacts GET https://week3service-b7z4.onrender.com/contacts
 
-### Get contact by id GET https://week3service.onrender.com/contacts/622023f642f9ab4cd6e060b3
+### Get contact by id GET https://week3service-b7z4.onrender.com/contacts/622023f642f9ab4cd6e060b3
 
-### Create contact POST https://week3service.onrender.com/contacts
+### Create contact POST https://week3service-b7z4.onrender.com/contacts
 
 {
 "firstName": "Becca", "lastName": "Manning", "email": "BManning22@gmail.com", "favoriteColor": "Yellow", "birthday": "01/19/2003"
 }
 
-### PUT contact PUT https://week3service.onrender.com/contacts/6220bcb39cd507e920c75a0b
+### PUT contact PUT https://week3service-b7z4.onrender.com/contacts/6220bcb39cd507e920c75a0b
 
 {
 "firstName": "Becca", "lastName": "Manning", "email": "Newmail@gmail.com", "favoriteColor": "Pink", "birthday": "05/22/2005"
 }
 
-### DELETE contact DELETE https://week3service.onrender.com/contacts/6220e34083149913680f9a64
+### DELETE contact DELETE https://week3service-b7z4.onrender.com/contacts/6220e34083149913680f9a64
