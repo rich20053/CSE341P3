@@ -30,14 +30,6 @@ const getSingle = async (req, res, next) => {
 // Create one contact from body json
 const createContact = async (req, res, next) => {
 
-  // Validate request
- /*
-  if (!req.body.length) { 
-    return res.status(400).send({
-      message: "Data to for new contact cannot be empty!"
-    });
-  }
-  */
   // Create a Contact
   const contact = {
     firstName: req.body.firstName,
@@ -59,14 +51,6 @@ const createContact = async (req, res, next) => {
   
 // Update a single contact
 const updateContact = async (req, res, next) => {
-  // Data Validation
-  /*
-  if (!req.body.length) {
-    return res.status(400).send({
-      message: "Data to update contact cannot be empty!"
-    });
-  }
-  */
   
   const userId = new ObjectId(req.params.id);
 
@@ -95,7 +79,7 @@ const deleteContact = async (req, res, next) => {
   
   const response = await mongodb.getDb().db("MarkContact").collection('Contacts').deleteOne({ _id: userId }, true);
   if (response.deletedCount > 0) {
-    res.status(204).send();
+    res.status(200).send();
   } else {
     res.status(500).json(response.error || 'An error occurred while deleting the contact.');
   }
