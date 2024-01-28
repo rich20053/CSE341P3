@@ -31,15 +31,13 @@ const getSingle = async (req, res, next) => {
 const createContact = async (req, res, next) => {
 
   // Validate request
- 
+ /*
   if (!req.body.length) { 
     return res.status(400).send({
       message: "Data to for new contact cannot be empty!"
     });
   }
-  
-
-
+  */
   // Create a Contact
   const contact = {
     firstName: req.body.firstName,
@@ -62,11 +60,13 @@ const createContact = async (req, res, next) => {
 // Update a single contact
 const updateContact = async (req, res, next) => {
   // Data Validation
+  /*
   if (!req.body.length) {
     return res.status(400).send({
       message: "Data to update contact cannot be empty!"
     });
   }
+  */
   
   const userId = new ObjectId(req.params.id);
 
