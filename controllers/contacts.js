@@ -15,7 +15,8 @@ const getAll = async (req, res, next) => {
 // Return one contact by id
 const getSingle = async (req, res, next) => {
   const userId = new ObjectId(req.params.id);
-
+  console.log(userId);
+  
   const result = await mongodb
     .getDb()
     .db("MarkContact")
@@ -65,7 +66,7 @@ const updateContact = async (req, res, next) => {
   
   // Update data in database
   const response = await mongodb.getDb().db("MarkContact").collection('Contacts').replaceOne({ _id: userId }, contact);
-  console.log(response);
+
   if (response.modifiedCount > 0) {
     res.status(204).send();
   } else {
