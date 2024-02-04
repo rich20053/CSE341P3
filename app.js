@@ -16,7 +16,6 @@ app
   //.use(cors(corsOptions))
   //.use(express.json())
   .use(bodyParser.json())
-  .use('/', require('./routes'))
   .use(express.urlencoded({ extended: true }))
   .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,6 +27,7 @@ app
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     next();
   })
+  .use('/', require('./routes'))
   //.use('/contacts', contactRoutes);
 
 mongodb.initDb((err, mongodb) => {
